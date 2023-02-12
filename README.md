@@ -5,11 +5,13 @@ Api-consultorio Medico
 ## Sobre proyecto
 
 -El doctor Ramiro Fernandez nos contactó porque quiere adquirir un sistema para la administración de las historias médicas y el manejo de citas de sus pacientes
+
 ## Diseño de la lógica de sistema para administración de citas y pacientes:
-1-	Se procedió a crear un diagrama de Entidad-Relación para identificar las clases que se desarrollarían en el programa, luego en UML se escribieron los posibles atributos y métodos principales, que arrojo la clase abstracta Usuario para paciente y doctor.
-2-	 Se diseñaron los endpoints de las clases, Paciente, agenda, consulta/ historial ya que el historial es una lista de consultas en nuestra lógica.
-En este sentido, se tiene una lista de pacientes, consultas (estas contienen los datos que generan la historia de ese paciente como motivo de consulta cantidad de consultas previas, fecha de registro del paciente, tratamiento y diagnóstico. 
-El doctor maneja su agenda, en este caso se ejecuta una agenda (lista donde se encuentra el día, la hora que esté disponible ejemplo: lunes, 8:00 am a 11:30. Así, esa franja horaria en la agenda permite agendar una cita a un paciente, siendo que si está disponible se paciente seria null.
+
+* 1-	Se procedió a crear un diagrama de Entidad-Relación para identificar las clases que se desarrollarían en el programa, luego en UML se escribieron los posibles atributos y métodos principales, que arrojo la clase abstracta Usuario para paciente y doctor.
+* 2-	 Se diseñaron los endpoints de las clases, Paciente, agenda, consulta/ historial ya que el historial es una lista de consultas en nuestra lógica.
+* En este sentido, se tiene una lista de pacientes, consultas (estas contienen los datos que generan la historia de ese paciente como motivo de consulta cantidad de consultas previas, fecha de registro del paciente, tratamiento y diagnóstico. 
+* El doctor maneja su agenda, en este caso se ejecuta una agenda (lista donde se encuentra el día, la hora que esté disponible ejemplo: lunes, 8:00 am a 11:30. Así, esa franja horaria en la agenda permite agendar una cita a un paciente, siendo que si está disponible se paciente seria null.
 
 
 
@@ -392,7 +394,7 @@ localhost:8080/sistema/paciente/actualizar/consulta/14/11
 
   ```
   
- -Petición que permite actualizar una consulta la cual es agregada al hsitorial de consultas del paciente 
+ - Petición que permite actualizar una consulta la cual es agregada al hsitorial de consultas del paciente 
      
 ```json
  

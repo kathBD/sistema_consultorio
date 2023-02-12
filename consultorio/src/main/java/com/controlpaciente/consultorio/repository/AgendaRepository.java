@@ -2,11 +2,10 @@ package com.controlpaciente.consultorio.repository;
 
 import com.controlpaciente.consultorio.model.Agenda;
 import com.controlpaciente.consultorio.model.Cita;
-import com.controlpaciente.consultorio.model.Consulta;
 import com.controlpaciente.consultorio.model.Paciente;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +64,32 @@ public class AgendaRepository {
         actualizarAgenda(agenda,agenda.getId());
     }
 //String id, String dia, String fecha, LocalTime ini, LocalTime fin
+    public void cancelarCita(String idAgenda, int idCita) {
+        Agenda agenda = obtAgendaPorId(idAgenda);
+        List<Cita> listaCita = agenda.getCitas();
+        int index= listaCita.indexOf(obtCitaPorId(agenda,idCita));
+        listaCita.get(index).setDisponible(true);
+        agenda.setCitas(listaCita);
+        actualizarAgenda(agenda,agenda.getId());
+   }
+
+    public void confirmarCita(String idAgenda, int idCita ) {
+        Agenda agenda = obtAgendaPorId(idAgenda);
+        List<Cita> listaCita = agenda.getCitas();
+        int index= listaCita.indexOf(obtCitaPorId(agenda,idCita));
+        listaCita.get(index).setDisponible(false);
+        agenda.setCitas(listaCita);
+        actualizarAgenda(agenda,agenda.getId());
+    }
+    public Paciente asignarPaciente(String idAgenda, int idCita, Paciente paciente ){
+        Agenda agenda = obtAgendaPorId(idAgenda);
+        List<Cita> listaCita = agenda.getCitas();
+        int index= listaCita.indexOf(obtCitaPorId(agenda,idCita));
+        listaCita.get(index).setPaciente(paciente);
+        agenda.setCitas(listaCita);
+        actualizarAgenda(agenda,agenda.getId());
+        return paciente;
+    }
 
     private void inicializarAgenda(){
         agendasdecitas = new ArrayList<>(List.of(

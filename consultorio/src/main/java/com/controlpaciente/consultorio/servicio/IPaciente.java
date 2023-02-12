@@ -16,4 +16,7 @@ public interface IPaciente {
     List<Consulta> obtenertodasConsultas(Paciente paciente);
     Consulta actualizarConsulta(Paciente paciente, Consulta consulta,String idConsulta);
     Consulta obtenerConsultaporID(Paciente paciente,String idConsulta);
+
+
+
 }

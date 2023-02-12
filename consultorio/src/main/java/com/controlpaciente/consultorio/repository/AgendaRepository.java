@@ -69,6 +69,7 @@ public class AgendaRepository {
         List<Cita> listaCita = agenda.getCitas();
         int index= listaCita.indexOf(obtCitaPorId(agenda,idCita));
         listaCita.get(index).setDisponible(true);
+        listaCita.get(index).setPaciente(null);
         agenda.setCitas(listaCita);
         actualizarAgenda(agenda,agenda.getId());
    }
@@ -86,6 +87,7 @@ public class AgendaRepository {
         List<Cita> listaCita = agenda.getCitas();
         int index= listaCita.indexOf(obtCitaPorId(agenda,idCita));
         listaCita.get(index).setPaciente(paciente);
+        listaCita.get(index).setDisponible(false);
         agenda.setCitas(listaCita);
         actualizarAgenda(agenda,agenda.getId());
         return paciente;

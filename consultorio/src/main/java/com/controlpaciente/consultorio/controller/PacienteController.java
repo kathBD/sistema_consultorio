@@ -25,8 +25,6 @@ public class PacienteController {
         return new ResponseEntity(pacienteServicio.obtenertodosPacientes(), HttpStatus.OK);
     }
 
-
-
     @PostMapping("/crear")
     public ResponseEntity crearPaciente(@RequestBody Paciente paciente){
         pacienteServicio.agregarPaciente(paciente);
@@ -67,6 +65,8 @@ public class PacienteController {
 
         return new ResponseEntity(p, HttpStatus.ACCEPTED);
     }
+
+
 
 
 

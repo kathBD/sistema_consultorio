@@ -53,7 +53,7 @@ public class AgendaServicio implements IAgenda{
 
     @Override
     public void activarDesactivarCita(String idAgenda, int idCita,String accion) {
-        if (accion == "A"){
+        if (accion == "a"){
             agendaRepository.confirmarCita(idAgenda, idCita);
         }else{
             agendaRepository.cancelarCita(idAgenda, idCita);

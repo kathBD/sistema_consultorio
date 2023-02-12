@@ -171,7 +171,7 @@ localhost:8080/sistema/agenda/listar
                 },
                 "paciente": null,
                 "disponible": true
-            },
+            }
 
 ```
 
@@ -359,5 +359,51 @@ localhost:8080/sistema/agenda/listar
 }
 ```
 
+ ## Peticiones HTTP - Consulta/historia
 
+  - POST localhost:8080/sistema/paciente/crear/consulta/{idPaciente}
+
+  ```
+
+localhost:8080/sistema/paciente/crear/consulta/11
+
+  ```
+  
+ -Petición que permite crear una consulta la cual es, agregada al historial de consultas del paciente 
+     
+```json
+ 
+     {
+        "id": "18",
+        "numeroConsultas": "3",
+        "fechaRegistro": "11-01-2023",
+        "fechaModificacion": "12-02.2023",
+        "motivoDeConsulta": "Control medico",
+        "tramiento": "plan alimenticio",
+        "diagnostico": "sobrepeso"
+    }
+```
+
+- PUT localhost:8080/sistema/paciente//actualizar/consulta/{idpaciente}/{idconsulta}
+
+  ```
+
+localhost:8080/sistema/paciente/actualizar/consulta/14/11
+
+  ```
+  
+ -Petición que permite actualizar una consulta la cual es agregada al hsitorial de consultas del paciente 
+     
+```json
+ 
+  {
+        "id": "11",
+        "numeroConsultas": "6",
+        "fechaRegistro": "10-02-2023",
+        "fechaModificacion": "11-02.2023",
+        "motivoDeConsulta": "Control cronico",
+        "tramiento": "plan alimenticio, ejercicio",
+        "diagnostico": "colesterol alto"
+    }
+```
 

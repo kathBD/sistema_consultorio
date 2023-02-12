@@ -15,7 +15,7 @@ public class Agenda {
     private String fecha;
     private LocalTime ini;
     private LocalTime fin;
-    private List<Horario> citas;
+    private List<Cita> citas;
 
 
     public Agenda() {
@@ -28,7 +28,9 @@ public class Agenda {
         this.fecha = fecha;
         this.ini = ini;
         this.fin = fin;
-        this.citas = new ArrayList<Horario>();
+        this.generarCitasDisponibles();
+
+
     }
 
     public String getId() {
@@ -71,11 +73,11 @@ public class Agenda {
         this.fin = fin;
     }
 
-    public List<Horario> getCitas() {
+    public List<Cita> getCitas() {
         return citas;
     }
 
-    public void setCitas(List<Horario> citas) {
+    public void setCitas(List<Cita> citas) {
         this.citas = citas;
     }
 
@@ -83,9 +85,10 @@ public class Agenda {
         LocalTime inicio = this.getIni();
         LocalTime fin = this.getFin();
         LocalTime nuevaHorario = inicio.plusMinutes(30);
+        int i =0;
         while (inicio.isBefore(fin)){
             if (nuevaHorario.isBefore(fin)) {
-                citas.add(new Horario(this.getFecha(), inicio, nuevaHorario));
+                citas.add(new Cita( i++,new Horario(this.getFecha(), inicio, nuevaHorario),true));
                 inicio = nuevaHorario;
             }else {
                 break;

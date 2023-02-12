@@ -89,6 +89,6 @@ public class PacienteRepository {
         pacientes.stream().forEach(p->p.getHistoria().add(consulta1));
         pacientes.stream().forEach(p->p.getHistoria().add(consulta2));
 
-}
+    }
 
 }

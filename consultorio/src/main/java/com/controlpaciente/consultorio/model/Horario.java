@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-public class Horario {
+public  class Horario {
 
 
     private String id;
-   private String fecha;
+    private String fecha;
     private LocalTime inicio;
     private LocalTime finalizada;
     private static  final int DURACION = 30;

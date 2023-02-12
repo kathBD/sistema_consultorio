@@ -1,5 +1,8 @@
 package com.controlpaciente.consultorio.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Paciente extends Usuario {
 
     /**
@@ -11,6 +14,8 @@ public class Paciente extends Usuario {
    private  String sexo;
    private String fecha_ingreso;
 
+   private List<Consulta> historia;
+
 
 
 
@@ -21,6 +26,7 @@ public class Paciente extends Usuario {
         this.estatura = estatura;
         this.sexo = sexo;
         this.fecha_ingreso = fecha_ingreso;
+        this.historia = new ArrayList<Consulta>();
 
     }
 
@@ -75,15 +81,11 @@ public class Paciente extends Usuario {
         super.setId(id);
     }
 
+    public List<Consulta> getHistoria() {
+        return historia;
+    }
 
-    @Override
-    public String toString() {
-        return "Paciente{" +
-                "edad=" + edad +
-                ", peso=" + peso +
-                ", estatura=" + estatura +
-                ", sexo='" + sexo + '\'' +
-                ", fecha_ingreso='" + fecha_ingreso + '\'' +
-                '}';
+    public void setHistoria(List<Consulta> historia) {
+        this.historia = historia;
     }
 }

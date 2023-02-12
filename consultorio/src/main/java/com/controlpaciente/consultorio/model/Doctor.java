@@ -6,6 +6,7 @@ public class Doctor extends Usuario {
      * Atributos de la clase doctor
      */
 
+
     private String especialidad;
 
 
@@ -23,10 +24,5 @@ public class Doctor extends Usuario {
         this.especialidad = especialidad;
     }
 
-    @Override
-    public String toString() {
-        return "Doctor{" +
-                "especialidad='" + especialidad + '\'' +
-                '}';
-    }
+
 }

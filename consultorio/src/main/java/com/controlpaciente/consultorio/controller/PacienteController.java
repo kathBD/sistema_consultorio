@@ -1,6 +1,7 @@
 package com.controlpaciente.consultorio.controller;
 
 
+import com.controlpaciente.consultorio.model.Consulta;
 import com.controlpaciente.consultorio.model.Paciente;
 import com.controlpaciente.consultorio.servicio.IPaciente;
 import com.controlpaciente.consultorio.servicio.PacienteServicio;
@@ -9,10 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/sistema/paciente")
@@ -38,21 +36,37 @@ public class PacienteController {
 
   @PutMapping("/actualizar/{pacienteId}")
     public ResponseEntity actualizarPaciente(@PathVariable ("pacienteId") String id, @RequestBody Paciente paciente){
-        Paciente  p= pacienteServicio.obtPacientePorId(id);
-        pacienteServicio.actualizarPaciente(p,id);
-        return new ResponseEntity(p, HttpStatus.ACCEPTED);
+        pacienteServicio.actualizarPaciente(paciente,id);
+        return new ResponseEntity(paciente, HttpStatus.ACCEPTED);
   }
 
-
-/*
-*
-*   @DeleteMapping("/{noteId}")
-    public ResponseEntity deleteNote(@PathVariable("noteId") String id){
-        List<Note> newNotes = notes.stream().filter(n -> !n.getId().equals(id)).collect(Collectors.toList());
-        this.notes = newNotes;
-        return new ResponseEntity(notes, HttpStatus.GONE);
+  @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity eliminarPaciente(@PathVariable ("id") String id){
+        pacienteServicio.eliminarPaciente(id);
+        return ResponseEntity.noContent().build();
     }
-* */
+
+    @GetMapping("/listar/historial/{idPaciente}")
+    public ResponseEntity listarHistoriaPaciente(@PathVariable ("idPaciente") String id){
+        Paciente p = pacienteServicio.obtPacientePorId(id);
+        return new ResponseEntity(pacienteServicio.obtenertodasConsultas(p), HttpStatus.OK);
+    }
+
+    @PostMapping("/crear/consulta/{idPaciente}")
+    public ResponseEntity crearConsultaAPaciente(@PathVariable ("idPaciente") String id,@RequestBody Consulta consulta){
+        Paciente p = pacienteServicio.obtPacientePorId(id);
+        pacienteServicio.agregarConsulta(p,consulta);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+    @PutMapping("/actualizar/consulta/{idpaciente}/{idconsulta}")
+    public ResponseEntity actualizarPaciente(@PathVariable ("idpaciente") String idPaciente,
+                                             @PathVariable ("idconsulta") String idConsulta,
+                                             @RequestBody Consulta consulta){
+        Paciente p = pacienteServicio.obtPacientePorId(idPaciente);
+        pacienteServicio.actualizarConsulta(p,consulta,idConsulta);
+
+        return new ResponseEntity(p, HttpStatus.ACCEPTED);
+    }
 
 
 

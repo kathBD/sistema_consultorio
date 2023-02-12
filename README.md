@@ -120,7 +120,7 @@ El doctor maneja su agenda, en este caso se ejecuta una agenda (lista donde se e
  -Petición que permite visualizar mediante el id de paciente la lista de consultas que ha realziado, es decir su historial. 
      
 ```json
- [
+ 
     {
         "id": "01",
         "numeroConsultas": "01",
@@ -139,6 +139,225 @@ El doctor maneja su agenda, en este caso se ejecuta una agenda (lista donde se e
         "tramiento": "se remite a examen neurologico",
         "diagnostico": "Laberintitis"
     }
-]
+
 ```
  
+ ## Peticiones HTTP -Agenda
+
+  - GET localhost:8080/sistema/agenda/listar
+
+  ```
+localhost:8080/sistema/agenda/listar
+
+  ```
+ -Petición que permite listar la agenda que introduce el Doctor Ramirez, esta indica el dia, y horas disponibles. 
+     
+```json
+ 
+    {
+        "id": "25",
+        "dia": "Lunes",
+        "fecha": "2023-02-02",
+        "ini": "08:00:00",
+        "fin": "11:30:00",
+        "citas": [
+            {
+                "id": 0,
+                "horario": {
+                    "fecha": "2023-02-02",
+                    "inicio": "08:00:00",
+                    "finalizada": "08:30:00",
+                    "dia": "THURSDAY"
+                },
+                "paciente": null,
+                "disponible": true
+            },
+
+```
+
+- POST localhost:8080/sistema/agenda/crear
+
+  ```
+
+   localhost:8080/sistema/agenda/crear
+
+  ```
+  
+ - Petición que permite crear un horario para citas es decir, dia, fecha inicio de horario y final de horario disponible 
+    para citas realizadas por el doctor. 
+  
+  ```json
+ 
+    {
+        "id": "45",
+        "dia": "Jueves",
+        "fecha": "2023-02-18",
+        "ini": "08:00:00",
+        "fin": "11:30:00"
+        
+    }
+
+```
+
+
+- PUT localhost:8080/sistema/agenda/actualizar/{idAgenda}"
+
+  ```
+
+  localhost:8080/sistema/agenda/actualizar/45
+
+  ```
+  
+ - Petición que permite modificar un horario en la agenda
+    
+  
+  ```json
+ 
+    {
+        "id": "45",
+        "dia": "Jueves",
+        "fecha": "2023-02-18",
+        "ini": "08:00:00",
+        "fin": "15:30:00"
+        
+    }
+
+```
+
+ ## Peticiones HTTP - Cita
+
+- GET localhost:8080/sistema/agenda/listar/cita{idAgenda}
+
+
+  ```
+  
+  localhost:8080/sistema/agenda/listar/cita/25
+ 
+
+  ```
+  
+- Petición que permite lista las citas de una agenda del doctor (franja dias, hora comiento y fin de hora que atiende)y siendo citas que pueden 
+  ser tomadas por el  paciente cuando este es null. 
+ 
+  
+  ```json
+  
+    {
+        "id": 0,
+        "horario": {
+            "fecha": "2023-02-02",
+            "inicio": "08:00:00",
+            "finalizada": "08:30:00",
+            "dia": "THURSDAY"
+        },
+        "paciente": null,
+        "disponible": true
+    },
+    {
+        "id": 1,
+        "horario": {
+            "fecha": "2023-02-02",
+            "inicio": "08:30:00",
+            "finalizada": "09:00:00",
+            "dia": "THURSDAY"
+        },
+        "paciente": null,
+        "disponible": true
+    },
+    {
+        "id": 2,
+        "horario": {
+            "fecha": "2023-02-02",
+            "inicio": "09:00:00",
+            "finalizada": "09:30:00",
+            "dia": "THURSDAY"
+        },
+        "paciente": null,
+        "disponible": true
+    },
+    {
+        "id": 3,
+        "horario": {
+            "fecha": "2023-02-02",
+            "inicio": "09:30:00",
+            "finalizada": "10:00:00",
+            "dia": "THURSDAY"
+        },
+        "paciente": null,
+        "disponible": true
+     }
+  
+ ```
+ 
+ 
+ - PUT localhost:8080/sistema/agenda/asignar/cita/{idAgenda}/{idCita}
+
+
+  ```
+  
+  localhost:8080/sistema/agenda/asignar/cita/25/0
+
+  ```
+  
+  
+  -Endponit que permite al paciente registrado tomar por medio del id agenda una cita de los horarios disponibles. 
+ 
+     
+ ```json
+ 
+    {
+    "id": "25",
+    "dia": "Lunes",
+    "fecha": "2023-02-02",
+    "ini": "08:00:00",
+    "fin": "11:30:00",
+    "citas": [
+        {
+            "id": 0,
+            "horario": {
+                "fecha": "2023-02-02",
+                "inicio": "08:00:00",
+                "finalizada": "08:30:00",
+                "dia": "THURSDAY"
+            },
+            "paciente": {
+                "id": "11",
+                "nombre": "Maria",
+                "apellido": "Toll",
+                "telefono": "320547774",
+                "edad": 50,
+                "peso": 74.0,
+                "estatura": 1.6,
+                "sexo": "femenino",
+                "fecha_ingreso": "10-01-2021",
+                "historia": []
+            },
+            "disponible": false
+        }
+ 
+```
+
+ - PUT /actdesactivar/cita/{idAgenda}/{idCita}/{accion} 
+
+  ```
+  localhost:8080/sistema/agenda/actdesactivar/cita/25/1/a
+
+  ```
+ -Este endpoint al doctor activar o desactivar una cita de la agenda en este caso medediante la acciín de colocar una a(activar) o no con otra letra 
+     
+```json
+ {
+    "id": 1,
+    "horario": {
+        "fecha": "2023-02-02",
+        "inicio": "08:30:00",
+        "finalizada": "09:00:00",
+        "dia": "THURSDAY"
+    },
+    "paciente": null,
+    "disponible": false
+}
+```
+
+
+

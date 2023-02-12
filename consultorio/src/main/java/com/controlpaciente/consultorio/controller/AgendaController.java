@@ -34,7 +34,7 @@ public class AgendaController {
     }
 
     @PutMapping("/actualizar/{idAgenda}")
-    public ResponseEntity actualizarAgenda(@PathVariable ("agendaId") String idAgenda, @RequestBody Agenda agenda){
+    public ResponseEntity actualizarAgenda(@PathVariable ("idAgenda") String idAgenda, @RequestBody Agenda agenda){
         agendaServicio.actualizarAgenda(agenda,idAgenda);
         return new ResponseEntity(agenda, HttpStatus.ACCEPTED);
     }

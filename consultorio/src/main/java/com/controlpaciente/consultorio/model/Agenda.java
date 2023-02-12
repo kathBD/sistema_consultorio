@@ -28,6 +28,7 @@ public class Agenda {
         this.fecha = fecha;
         this.ini = ini;
         this.fin = fin;
+        this.citas = new ArrayList<Cita>();
         this.generarCitasDisponibles();
 
 
@@ -82,14 +83,16 @@ public class Agenda {
     }
 
     public void generarCitasDisponibles() {
-        LocalTime inicio = this.getIni();
-        LocalTime fin = this.getFin();
-        LocalTime nuevaHorario = inicio.plusMinutes(30);
-        int i =0;
-        while (inicio.isBefore(fin)){
+
+        LocalTime i = this.getIni();
+        LocalTime f = this.getFin();
+        LocalTime nuevaHorario = i.plusMinutes(30);
+        int j =0;
+        while (i.isBefore(fin)){
             if (nuevaHorario.isBefore(fin)) {
-                citas.add(new Cita( i++,new Horario(this.getFecha(), inicio, nuevaHorario),true));
-                inicio = nuevaHorario;
+                Cita c = new Cita( j++, new Horario(this.getFecha(), i, nuevaHorario),true);
+                this.citas.add(c);
+                i = nuevaHorario;
             }else {
                 break;
             }

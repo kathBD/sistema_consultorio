@@ -11,7 +11,7 @@ public  class Horario {
     private String fecha;
     private LocalTime inicio;
     private LocalTime finalizada;
-    private static  final int DURACION = 30;
+    //private static  final int DURACION = 30;
 
     private  String dia;
     //private boolean disponibilidad;

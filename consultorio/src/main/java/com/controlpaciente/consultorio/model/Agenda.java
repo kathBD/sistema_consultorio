@@ -1,6 +1,7 @@
 package com.controlpaciente.consultorio.model;
 
 import javax.sound.sampled.FloatControl;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -28,10 +29,7 @@ public class Agenda {
         this.fecha = fecha;
         this.ini = ini;
         this.fin = fin;
-        this.citas = new ArrayList<Cita>();
         this.generarCitasDisponibles();
-
-
     }
 
     public String getId() {
@@ -83,16 +81,19 @@ public class Agenda {
     }
 
     public void generarCitasDisponibles() {
+        this.citas = new ArrayList<Cita>();
 
         LocalTime i = this.getIni();
         LocalTime f = this.getFin();
         LocalTime nuevaHorario = i.plusMinutes(30);
         int j =0;
-        while (i.isBefore(fin)){
-            if (nuevaHorario.isBefore(fin)) {
-                Cita c = new Cita( j++, new Horario(this.getFecha(), i, nuevaHorario),true);
+        while (i.isBefore(f)){
+            if (nuevaHorario.isBefore(f)) {
+                DayOfWeek vdia =LocalDate.parse(this.getFecha()).getDayOfWeek();
+                Cita c = new Cita( j++, new Horario(vdia,this.getFecha(),i,nuevaHorario),true);
                 this.citas.add(c);
                 i = nuevaHorario;
+                nuevaHorario = i.plusMinutes(30);
             }else {
                 break;
             }

@@ -5,6 +5,8 @@ import com.controlpaciente.consultorio.model.Cita;
 import com.controlpaciente.consultorio.model.Paciente;
 import com.controlpaciente.consultorio.repository.AgendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,7 +55,7 @@ public class AgendaServicio implements IAgenda{
 
     @Override
     public void activarDesactivarCita(String idAgenda, int idCita,String accion) {
-        if (accion == "a"){
+        if (accion.equals("a")){
             agendaRepository.confirmarCita(idAgenda, idCita);
         }else{
             agendaRepository.cancelarCita(idAgenda, idCita);
@@ -62,7 +64,9 @@ public class AgendaServicio implements IAgenda{
 
     @Override
     public void asiganarPaciente(String idAgenda, int idCita, Paciente paciente) {
-
+        Agenda a = agendaRepository.obtAgendaPorId(idAgenda);
+        Cita c = agendaRepository.obtCitaPorId(a,idCita);
+        agendaRepository.asignarPaciente(a.getId(),c.getId(),paciente);
     }
 
 

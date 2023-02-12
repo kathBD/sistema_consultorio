@@ -39,9 +39,10 @@ public class AgendaController {
         return new ResponseEntity(agenda, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/listar/cita/{idAgenda}")
-    public ResponseEntity listarCitasAgenda(@PathVariable ("idAgenda") String idAgenda){
+    @GetMapping("/listar/cita/{id}")
+    public ResponseEntity listarCitasAgenda(@PathVariable ("id") String idAgenda){
         Agenda a = agendaServicio.obtAgendaPorId(idAgenda);
+
         return new ResponseEntity(agendaServicio.obtenertodasCitas(a), HttpStatus.OK);
     }
 
@@ -49,13 +50,13 @@ public class AgendaController {
     public ResponseEntity actualizarPaciente(@PathVariable ("idAgenda") String idAgenda,
                                              @PathVariable ("idCita") String idCita,
                                              @RequestBody Paciente paciente){
-        Paciente p= pacienteServicio.obtPacientePorId(paciente.getId());
-        if (p==null){
+        Paciente p = pacienteServicio.obtPacientePorId(paciente.getId());
+       if (p==null){
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
-        }else{
+       }else{
             Agenda a = agendaServicio.obtAgendaPorId(idAgenda);
             Cita c = agendaServicio.obtenerCitaporID(a,Integer.parseInt(idCita));
-            agendaServicio.asiganarPaciente(idAgenda,c.getId(),paciente);
+            agendaServicio.asiganarPaciente(a.getId(),c.getId(),paciente);
             return new ResponseEntity(a, HttpStatus.ACCEPTED);
         }
     }
@@ -67,7 +68,7 @@ public class AgendaController {
        Agenda a = agendaServicio.obtAgendaPorId(idAgenda);
        Cita c = agendaServicio.obtenerCitaporID(a,Integer.parseInt(idCita));
        agendaServicio.activarDesactivarCita(a.getId(),c.getId(),accion);
-       return new ResponseEntity(a, HttpStatus.ACCEPTED);
+       return new ResponseEntity(c, HttpStatus.ACCEPTED);
      }
 
 

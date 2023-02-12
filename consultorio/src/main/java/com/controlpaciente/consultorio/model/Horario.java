@@ -1,5 +1,6 @@
 package com.controlpaciente.consultorio.model;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -13,14 +14,15 @@ public  class Horario {
     private LocalTime finalizada;
     //private static  final int DURACION = 30;
 
-    private  String dia;
+    private  DayOfWeek dia;
     //private boolean disponibilidad;
 
 
     public Horario() {
     }
 
-    public Horario(String fecha, LocalTime inicio, LocalTime finalizada ) {
+    public Horario(DayOfWeek dia, String fecha, LocalTime inicio, LocalTime finalizada ) {
+        this.dia = dia;
         this.fecha = fecha;
         this.inicio = inicio;
         this.finalizada = finalizada;
@@ -50,16 +52,11 @@ public  class Horario {
         this.finalizada = finalizada;
     }
 
-    public String getDia() {
+    public DayOfWeek getDia() {
         return dia;
     }
 
-    public void setDia(String dia) {
+    public void setDia(DayOfWeek dia) {
         this.dia = dia;
     }
-
-
-
-
-
 }

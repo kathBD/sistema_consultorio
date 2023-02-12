@@ -2,24 +2,28 @@ package com.controlpaciente.consultorio.model;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
-public abstract class Horario {
+public class Horario {
 
+
+    private String id;
    private String fecha;
     private LocalTime inicio;
     private LocalTime finalizada;
     private static  final int DURACION = 30;
-    private boolean disponibilidad;
+
+    private  String dia;
+    //private boolean disponibilidad;
 
 
     public Horario() {
     }
 
-    public Horario(String fecha, LocalTime inicio, LocalTime finalizada, boolean disponibilidad) {
+    public Horario(String fecha, LocalTime inicio, LocalTime finalizada ) {
         this.fecha = fecha;
         this.inicio = inicio;
         this.finalizada = finalizada;
-        this.disponibilidad = disponibilidad;
     }
 
     public String getFecha() {
@@ -46,16 +50,15 @@ public abstract class Horario {
         this.finalizada = finalizada;
     }
 
-
-    public boolean isDisponibilidad() {
-        return disponibilidad;
+    public String getDia() {
+        return dia;
     }
 
-    public void setDisponibilidad(boolean disponibilidad) {
-        this.disponibilidad = disponibilidad;
+    public void setDia(String dia) {
+        this.dia = dia;
     }
 
-    public abstract  void modificarDisponibilidad();
+
 
 
 
